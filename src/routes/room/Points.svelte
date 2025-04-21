@@ -8,7 +8,6 @@
 		playerId = localStorage.getItem('playerId');
 		if (!playerId) {
 			console.error('No playerId found.');
-			goto('/lobby');
 		}
 	});
 

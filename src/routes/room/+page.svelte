@@ -8,10 +8,19 @@
 		goto('/lobby');
 	}
 
+	let playerList = [];
+
+	room.subscribe((value) => {
+
+		console.log('room.subscribe', value);
+
+		playerList = value.playerList;
+	})
+
 </script>
 
 <Points data={[1,3,5,8,13]} />
 
-<Players data={room.playerList} />
+<Players data={playerList} />
 
 <button on:click={changeName}>Change name</button>

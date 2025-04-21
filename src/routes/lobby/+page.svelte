@@ -13,7 +13,7 @@
 		if (!playerId) {
 			playerId = crypto.randomUUID();
 
-			localStorage.setItem('playerId');
+			localStorage.setItem('playerId', playerId);
 		}
 	});
 

@@ -1,5 +1,7 @@
+import { writable } from 'svelte/store';
+
 const socket = new WebSocket('http://localhost:8080');
-let room = {};
+const room = writable({});
 
 socket.onopen = () => {
 	console.log('Socket opened');
@@ -12,7 +14,7 @@ socket.onmessage = (message) => {
 
 	if (eventType === 'room-update') {
 		console.log('room-update', payload);
-		room = payload;
+		room.set(payload);
 	}
 };
 
