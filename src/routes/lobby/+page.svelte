@@ -1,15 +1,24 @@
 <script>
 
+	import { onMount } from 'svelte';
+	import { socket } from '$lib/game-state.js';
 	import { goto } from '$app/navigation';
 
-
-	let playerId= $state('123')
+	let playerId = $state();
 	let playerName = $state('batman');
 
-	function joinRoom() {
-		const socket = new WebSocket('http://localhost:8080');
+	onMount(() => {
+		playerId = localStorage.getItem('playerId');
 
-		socket.onopen = () => {
+		if (!playerId) {
+			playerId = crypto.randomUUID();
+
+			localStorage.setItem('playerId');
+		}
+	});
+
+	function joinRoom() {
+		if (socket.readyState === WebSocket.OPEN) {
 			socket.send(JSON.stringify({
 				eventType: 'join-room',
 				payload: {
@@ -17,30 +26,14 @@
 					playerName
 				}
 			}));
-
 			goto('/room');
-		};
-
-		socket.onmessage = (message) => {
-			console.log('received: ', JSON.stringify(message.data));
 		}
-
-		socket.onerror = (error) => {
-			console.error('WebSocket error:', error);
-		};
-
-		socket.onclose = (event) => {
-			console.log('WebSocket closed:', event.reason);
-		};
-
-		goto('/room');
-
 	}
 </script>
 
 <h1>Lobby</h1>
-<form onsubmit={joinRoom}>
-	<label for="playerName">Player:</label>
+<form on:submit|preventDefault={joinRoom}>
+	<label for="playerName">Player ({playerId}):</label>
 	<input type="text" name="playerName" bind:value={playerName} required />
 
 	<button type="submit">Join</button>

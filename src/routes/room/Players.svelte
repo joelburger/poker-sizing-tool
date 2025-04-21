@@ -4,6 +4,6 @@
 
 <ul>
 	{#each data as player, index (index)}
-		<li>{player}</li>
+		<li>{player.name}</li>
 	{/each}
 </ul>

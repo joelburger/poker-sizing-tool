@@ -2,7 +2,7 @@
 	import Points from './Points.svelte';
 	import Players from './Players.svelte';
 	import { goto } from '$app/navigation';
-
+	import { room } from '$lib/game-state.js'
 
 	function changeName() {
 		goto('/lobby');
@@ -12,7 +12,6 @@
 
 <Points data={[1,3,5,8,13]} />
 
-<Players data="{['joel', 'paz', 'anya']}" />
-
+<Players data={room.playerList} />
 
 <button on:click={changeName}>Change name</button>
