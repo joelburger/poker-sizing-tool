@@ -5,14 +5,13 @@
 	import { goto } from '$app/navigation';
 
 	let playerId = $state();
-	let playerName = $state('batman');
+	let playerName = $state();
 
 	onMount(() => {
 		playerId = localStorage.getItem('playerId');
-
+		playerName = localStorage.getItem('playerName');
 		if (!playerId) {
 			playerId = crypto.randomUUID();
-
 			localStorage.setItem('playerId', playerId);
 		}
 	});
@@ -26,15 +25,17 @@
 					playerName
 				}
 			}));
+			localStorage.setItem('playerName', playerName);
 			goto('/room');
 		}
 	}
 </script>
 
-<h1>Lobby</h1>
+<h2>Lobby</h2>
 <form on:submit|preventDefault={joinRoom}>
-	<label for="playerName">Player ({playerId}):</label>
-	<input type="text" name="playerName" bind:value={playerName} required />
+	<input type="text" name="playerName" bind:value={playerName} placeholder="Enter your name" required class="input-text"/>
 
-	<button type="submit">Join</button>
+	<div class="button-group">
+		<button type="submit">Join</button>
+	</div>
 </form>

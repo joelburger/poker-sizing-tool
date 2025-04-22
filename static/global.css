@@ -1,0 +1,221 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+main {
+    background-color: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 500px;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1d1d1f;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.button-group button,
+section[aria-label="Controls"] button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #007aff;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-group button:hover,
+section[aria-label="Controls"] button:hover {
+    background-color: #006be6;
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+}
+
+.button-group button:active,
+section[aria-label="Controls"] button:active {
+    background-color: #005bb5;
+}
+
+.player-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.selected {
+    background-color: #f0f8ff; /* Light blue background */
+    font-weight: bold;
+}
+
+.player-list th,
+.player-list td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.player-list thead {
+    background-color: #f0f0f5;
+    border-radius: 12px 12px 0 0;
+}
+
+.player-list tbody tr {
+    border-top: 1px solid #e0e0e0;
+}
+
+.player-list td:first-child {
+    font-weight: 500;
+    color: #1d1d1f;
+}
+
+.player-list td:last-child {
+    text-align: right;
+    color: #555;
+    font-style: italic;
+}
+
+section[aria-label="Controls"] {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 2rem 1.5rem;
+    }
+
+    section[aria-label="Controls"] {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    section[aria-label="Controls"] button {
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .button-group button {
+        width: 100%;
+    }
+
+    .player-list td:last-child {
+        text-align: left;
+    }
+}
+
+.input-text {
+    width: 90%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #d0d0d5;
+    border-radius: 12px;
+    background-color: #f9f9fa;
+    color: #1d1d1f;
+    font-family: inherit;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
+    margin-top: 1rem; /* Add vertical spacing */
+}
+
+.input-text:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.2);
+}
+
+.voting-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.voting-buttons button {
+    width: 70px;
+    height: 100px;
+    font-size: 2rem;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #1d1d1f;
+    border: 1px solid #d0d0d5;
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.voting-buttons button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.voting-buttons button:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.summary-table th,
+.summary-table td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #1d1d1f;
+}
+
+.summary-table td:last-child {
+    text-align: right;
+}
+
+.summary-table thead {
+    background-color: #f0f0f5;
+}
+
+.summary-table tbody tr {
+    border-top: 1px solid #e0e0e0;
+}
+
+.summary-table tbody tr:nth-child(even) {
+    background-color: #f9f9fa;
+}
