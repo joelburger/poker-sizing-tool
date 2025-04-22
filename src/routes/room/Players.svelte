@@ -6,9 +6,9 @@
 	function displayPlayerEstimate(player) {
 		if (roomStatus === 'PENDING') {
 			if (player.estimate) {
-				return 'submitted';
+				return 'voted';
 			} else {
-				return 'pending';
+				return 'not voted';
 			}
 		} else {
 			return player.estimate;
