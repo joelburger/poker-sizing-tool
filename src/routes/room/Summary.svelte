@@ -6,16 +6,14 @@
 
 <section aria-label="Summary">
 	<h2>Summary</h2>
-	<table class="summary-table">
-		<tbody>
-		<tr>
-			<td>Mean</td>
-			<td>{summary?.mean}</td>
-		</tr>
-		<tr>
-			<td>Median</td>
-			<td>{summary?.median}</td>
-		</tr>
-		</tbody>
-	</table>
+	<div class="summary-columns">
+		<div class="summary-item">
+			<div class="summary-label">Mean</div>
+			<div class="summary-value">{summary?.mean}</div>
+		</div>
+		<div class="summary-item">
+			<div class="summary-label">Median</div>
+			<div class="summary-value">{summary?.median}</div>
+		</div>
+	</div>
 </section>

@@ -6,24 +6,29 @@
 	import { onMount } from 'svelte';
 	import Summary from './Summary.svelte';
 
-	function changeName() {
-		goto('/lobby');
-	}
-
-	let playerId;
-	let playerName;
-
-	let playerList = [];
-	let status;
-	let summary;
+	let playerId = $state();
+	let playerList = $state([]);
+	let status = $state();
+	let summary = $state();
+	let currentVote = $state();
 
 	onMount(() => {
 		playerId = localStorage.getItem('playerId');
-		playerName = localStorage.getItem('playerName');
 		if (status !== null) {
 			console.error('Invalid room status');
 		}
 	});
+
+	room.subscribe((roomState) => {
+		playerList = roomState.playerList;
+		status = roomState.status;
+		summary = roomState.summary;
+		currentVote = playerList?.find(player => player.id === playerId)?.estimate || null;
+	});
+
+	function changeName() {
+		goto('/lobby');
+	}
 
 	function resetRoom() {
 		socket.send(JSON.stringify({
@@ -34,40 +39,37 @@
 		}));
 	}
 
-
-	room.subscribe((roomState) => {
-		console.log('room state:', roomState);
-		playerList = roomState.playerList;
-		status = roomState.status;
-		summary = roomState.summary;
-	});
-
 </script>
 
-{#if status }
+{#if status}
 
-	{#if status === 'PENDING'}
-		<Points points={[1,2,3,5,8,13]} playerId={playerId} />
+	{#if status === 'PENDING' && playerList?.length > 0}
+		<Points points={[1,2,3,5,8,13]} playerId={playerId} currentVote={currentVote} />
 	{/if}
 
 	<Players playerList={playerList} roomStatus={status} playerId={playerId} />
 
-	{#if status === 'COMPLETED'}
+	{#if status === 'COMPLETED' && playerList?.length > 0}
 		<Summary summary={summary} />
 	{/if}
 
 	<div class="button-group">
-		{#if status === 'PENDING'}
-			<button on:click={changeName}>Change name</button>
+		{#if playerList?.length === 0}
+			<button on:click={changeName}>Go back to lobby</button>
+		{:else}
+			{#if status === 'PENDING'}
+				<button on:click={changeName}>Change name</button>
+			{/if}
+			<button on:click={resetRoom}>Reset voting</button>
 		{/if}
-		<button on:click={resetRoom}>Reset voting</button>
 	</div>
 {:else}
 	<p>Session disconnected</p>
-
 
 	<div class="button-group">
 		<button on:click={changeName}>Go back to lobby</button>
 	</div>
 {/if}
+
+
 

@@ -78,13 +78,14 @@ section[aria-label="Controls"] button:active {
     font-size: 1rem;
 }
 
-.player-list thead {
-    background-color: #f0f0f5;
-    border-radius: 12px 12px 0 0;
-}
-
 .player-list tbody tr {
     border-top: 1px solid #e0e0e0;
+}
+
+.player-list td:last-child {
+    width: 1rem; /* Adjust width to fit the icon */
+    text-align: center; /* Center the icon */
+    padding: 0.5rem; /* Optional: Adjust padding for better alignment */
 }
 
 .player-list td:first-child {
@@ -92,7 +93,7 @@ section[aria-label="Controls"] button:active {
     color: #1d1d1f;
 }
 
-.player-list td:last-child {
+.player-list td:nth-child(2) {
     text-align: right;
     color: #555;
     font-style: italic;
@@ -176,6 +177,11 @@ section[aria-label="Controls"] {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.voting-buttons button.selected {
+    background-color: #eae9e7;
+    font-size: 2.5rem;
+}
+
 .voting-buttons button:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
@@ -185,37 +191,57 @@ section[aria-label="Controls"] {
     transform: scale(0.98);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
+.summary-section {
+    margin-top: 2rem;
+}
 
-.summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    background-color: #ffffff;
+.summary-columns {
+    display: flex;
+    border: 1px solid #e0e0e0;
     border-radius: 12px;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.summary-table th,
-.summary-table td {
-    text-align: left;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
+.summary-item {
+    flex: 1;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.summary-item:not(:last-child) {
+    border-right: 1px solid #e0e0e0;
+}
+
+.summary-label {
+    font-size: 1.25rem;
+    font-weight: 600;
     color: #1d1d1f;
+    margin-bottom: 0.5rem;
 }
 
-.summary-table td:last-child {
-    text-align: right;
+.summary-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0d47a1;
 }
 
-.summary-table thead {
-    background-color: #f0f0f5;
+.delete-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.5rem; /* or adjust smaller/larger as you prefer */
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.summary-table tbody tr {
-    border-top: 1px solid #e0e0e0;
-}
-
-.summary-table tbody tr:nth-child(even) {
-    background-color: #f9f9fa;
+.delete-button:hover {
+    color: #d32f2f;
+    transform: scale(1.1);
 }
