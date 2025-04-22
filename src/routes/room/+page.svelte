@@ -12,6 +12,13 @@
 	let summary = $state();
 	let currentVote = $state();
 
+	function isPlayerInTheRoom(playerId, playerList) {
+		if (!playerList || playerList.length === 0) {
+			return false;
+		}
+		return playerList.some(player => player.id === playerId);
+	}
+
 	onMount(() => {
 		playerId = localStorage.getItem('playerId');
 		if (status !== null) {
@@ -41,8 +48,7 @@
 
 </script>
 
-{#if status}
-
+{#if status && isPlayerInTheRoom(playerId, playerList)}
 	{#if status === 'PENDING' && playerList?.length > 0}
 		<Points points={[1,2,3,5,8,13]} playerId={playerId} currentVote={currentVote} />
 	{/if}
