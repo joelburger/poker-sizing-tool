@@ -33,8 +33,8 @@
 		currentVote = playerList?.find(player => player.id === playerId)?.estimate || null;
 	});
 
-	function changeName() {
-		goto('/lobby');
+	function goToLobby() {
+		goto('/');
 	}
 
 	function resetRoom() {
@@ -61,19 +61,19 @@
 
 	<div class="button-group">
 		{#if playerList?.length === 0}
-			<button on:click={changeName}>Go back to lobby</button>
+			<button onclick={goToLobby}>Go back to lobby</button>
 		{:else}
 			{#if status === 'PENDING'}
-				<button on:click={changeName}>Change name</button>
+				<button onclick={goToLobby}>Change name</button>
 			{/if}
-			<button on:click={resetRoom}>Reset voting</button>
+			<button onclick={resetRoom}>Reset voting</button>
 		{/if}
 	</div>
 {:else}
 	<p>Session disconnected</p>
 
 	<div class="button-group">
-		<button on:click={changeName}>Go back to lobby</button>
+		<button onclick={goToLobby}>Go back to lobby</button>
 	</div>
 {/if}
 
