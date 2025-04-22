@@ -1,7 +1,5 @@
 <script>
-	import { socket } from '$lib/game-state.js';
-
-	const { playerList, roomStatus, playerId } = $props();
+	const { playerList, roomStatus, playerId, socket } = $props();
 
 	function displayPlayerEstimate(player) {
 		if (roomStatus === 'PENDING') {

@@ -1,7 +1,5 @@
 <script>
-	import { socket } from '$lib/game-state.js';
-
-	const { points, playerId, currentVote } = $props();
+	const { points, playerId, currentVote, socket } = $props();
 
 	function updateEstimate(value) {
 		console.log(`Player ${playerId} estimates the story at ${value}`);

@@ -1,29 +1,39 @@
 import { writable } from 'svelte/store';
 
-const socket = new WebSocket('http://localhost:8080');
 const room = writable({});
+let socket;
 
-socket.onopen = () => {
-	console.log('Socket opened');
-};
+function fetchSocket(socketUrl) {
+	console.log('Socket URL:', socketUrl);
 
-socket.onmessage = (message) => {
-	console.log('message.data', message.data);
-	const { eventType, payload } = JSON.parse(message.data);
-	console.log( { eventType, payload } );
-
-	if (eventType === 'room-update') {
-		console.log('room-update', payload);
-		room.set(payload);
+	if (socket) {
+		return socket;
 	}
-};
 
-socket.onerror = (error) => {
-	console.error('WebSocket error:', error);
-};
+	socket = new WebSocket(socketUrl);
+	socket.onopen = () => {
+		console.log('Socket opened');
+	};
 
-socket.onclose = (event) => {
-	console.log('WebSocket closed:', event.reason);
-};
+	socket.onmessage = (message) => {
+		const { eventType, payload } = JSON.parse(message.data);
+		console.log({ eventType, payload });
 
-export { room, socket };
+		if (eventType === 'room-update') {
+			console.log('room-update', payload);
+			room.set(payload);
+		}
+	};
+
+	socket.onerror = (error) => {
+		console.error('WebSocket error:', error);
+	};
+
+	socket.onclose = (event) => {
+		console.log('WebSocket closed:', event.reason);
+	};
+
+	return socket;
+}
+
+export { room, fetchSocket };

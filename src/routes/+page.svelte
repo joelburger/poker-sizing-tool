@@ -1,11 +1,13 @@
 <script>
 
 	import { onMount } from 'svelte';
-	import { socket } from '$lib/game-state.js';
+	import { fetchSocket } from '$lib/game-state.js';
 	import { goto } from '$app/navigation';
 
 	let playerId = $state();
 	let playerName = $state();
+	let { data } = $props();
+	const socket = fetchSocket(data.WS_SERVER_URL);
 
 	onMount(() => {
 		playerId = localStorage.getItem('playerId');

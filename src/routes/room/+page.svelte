@@ -2,10 +2,12 @@
 	import Points from './Points.svelte';
 	import Players from './Players.svelte';
 	import { goto } from '$app/navigation';
-	import { room, socket } from '$lib/game-state.js';
+	import { room, fetchSocket } from '$lib/game-state.js';
 	import { onMount } from 'svelte';
 	import Summary from './Summary.svelte';
 
+	const { data } = $props();
+	const socket = fetchSocket(data.WS_SERVER_URL);
 	let playerId = $state();
 	let playerList = $state([]);
 	let status = $state();
@@ -50,10 +52,10 @@
 
 {#if status && isPlayerInTheRoom(playerId, playerList)}
 	{#if status === 'PENDING' && playerList?.length > 0}
-		<Points points={[1,2,3,5,8,13]} playerId={playerId} currentVote={currentVote} />
+		<Points points={[1,2,3,5,8,13]} playerId={playerId} currentVote={currentVote} socket={socket} />
 	{/if}
 
-	<Players playerList={playerList} roomStatus={status} playerId={playerId} />
+	<Players playerList={playerList} roomStatus={status} playerId={playerId} socket={socket} />
 
 	{#if status === 'COMPLETED' && playerList?.length > 0}
 		<Summary summary={summary} />
