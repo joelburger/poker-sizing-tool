@@ -31,12 +31,16 @@
 		}
 	}
 </script>
+{#if socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING}
+	<h2>Lobby</h2>
+	<form on:submit|preventDefault={joinRoom}>
+		<input type="text" name="playerName" bind:value={playerName} placeholder="Enter your name" required
+					 class="input-text" />
 
-<h2>Lobby</h2>
-<form on:submit|preventDefault={joinRoom}>
-	<input type="text" name="playerName" bind:value={playerName} placeholder="Enter your name" required class="input-text"/>
-
-	<div class="button-group">
-		<button type="submit">Join</button>
-	</div>
-</form>
+		<div class="button-group">
+			<button type="submit">Join</button>
+		</div>
+	</form>
+{:else}
+	<h2>Out for lunch. Be back in 20 minutes.</h2>
+{/if}
