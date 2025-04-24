@@ -4,15 +4,15 @@ const room = writable({});
 let socket;
 
 function fetchSocket(socketUrl) {
-	console.log('Socket URL:', socketUrl);
+	console.log('WebSocket URL:', socketUrl);
 
-	if (socket) {
+	if (socket && socket.readyState === WebSocket.OPEN) {
 		return socket;
 	}
 
 	socket = new WebSocket(socketUrl);
 	socket.onopen = () => {
-		console.log('Socket opened');
+		console.log('WebSocket opened');
 	};
 
 	socket.onmessage = (message) => {

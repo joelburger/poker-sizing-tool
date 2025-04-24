@@ -245,3 +245,13 @@ section[aria-label="Controls"] {
     color: #d32f2f;
     transform: scale(1.1);
 }
+
+footer {
+    color: #6c757d;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
