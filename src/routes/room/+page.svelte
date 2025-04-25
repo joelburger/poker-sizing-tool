@@ -72,7 +72,7 @@
 		{/if}
 	</div>
 {:else}
-	<p>Session disconnected</p>
+	<p class="centered-title">Session disconnected</p>
 
 	<div class="button-group">
 		<button onclick={goToLobby}>Go back to lobby</button>

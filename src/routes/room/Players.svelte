@@ -6,9 +6,9 @@
 	function displayPlayerEstimate(player) {
 		if (roomStatus === 'PENDING') {
 			if (player.estimate) {
-				return 'voted';
+				return 'VOTED';
 			} else {
-				return 'not voted';
+				return 'NOT VOTED';
 			}
 		} else {
 			return player.estimate;
@@ -28,21 +28,17 @@
 
 <section aria-label="Players">
 	<h2>Players</h2>
-	{#if playerList?.length === 0}
-		<p>Everyone has left the room</p>
-	{:else}
-		<table class="player-list">
-			<tbody>
-			{#each playerList as player, index (index)}
-				<tr class:selected={playerId === player.id}>
-					<td>{player.name}</td>
-					<td>{displayPlayerEstimate(player)}</td>
-					<td>
-						<button class="delete-button" onclick={() => removePlayer(player)}>❌</button>
-					</td>
-				</tr>
-			{/each}
-			</tbody>
-		</table>
-	{/if}
+	<table class="player-list">
+		<tbody>
+		{#each playerList as player, index (index)}
+			<tr class:selected={playerId === player.id}>
+				<td>{player.name}</td>
+				<td><span class="badge" class:voted={player.estimate !== null} class:not-voted={player.estimate === null}>{displayPlayerEstimate(player)}</span></td>
+				<td>
+					<button class="delete-button" onclick={() => removePlayer(player)}>❌</button>
+				</td>
+			</tr>
+		{/each}
+		</tbody>
+	</table>
 </section>

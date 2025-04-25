@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Bangers';
+    src: url('/fonts/Bangers-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Badaboom';
+    src: url('/fonts/BADABB.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f5f5f7;
@@ -11,7 +25,7 @@ body {
 }
 
 main {
-    background-color: #ffffff;
+    background-color: #fcfcfe;
     padding: 2.5rem 2rem;
     border-radius: 20px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.04);
@@ -134,28 +148,42 @@ section[aria-label="Controls"] {
         text-align: left;
     }
 }
-
-.input-text {
-    width: 90%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #d0d0d5;
+.input-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
     border-radius: 12px;
-    background-color: #f9f9fa;
-    color: #1d1d1f;
-    font-family: inherit;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1rem;
-    margin-top: 1rem; /* Add vertical spacing */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 1rem;
+    max-width: 300px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.input-text:focus {
+.avatar {
+    margin-right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-icon {
+    width: 24px;
+    height: 24px;
+    color: #2d9cdb;
+}
+
+.name-input {
+    flex: 1;
+    border: none;
     outline: none;
-    border-color: #007aff;
-    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.2);
+    font-size: 1rem;
+    color: #333;
 }
 
+.name-input::placeholder {
+    color: #bbb;
+}
 .voting-buttons {
     display: flex;
     gap: 1rem;
@@ -247,11 +275,31 @@ section[aria-label="Controls"] {
     transform: scale(1.1);
 }
 
-.version-number {
-    position: absolute; /* Position relative to the body */
-    top: 10px; /* Distance from the top */
-    right: 10px; /* Distance from the right */
-    font-size: 0.5rem;
-    color: #6c757d;
-    text-align: right;
+.centered-title {
+    text-align: center;
 }
+
+.title {
+    font-family: 'Badaboom';
+    color: #1d1d1f;
+    font-size: 4em;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.badge.voted {
+    background-color: #4caf50; /* Green for voted */
+}
+
+.badge.not-voted {
+    background-color: #f44336; /* Red for not voted */
+}
+
