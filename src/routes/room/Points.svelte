@@ -1,15 +1,17 @@
 <script>
-	const { points, playerId, currentVote, socket } = $props();
+	import { sendMessage } from '$lib/game-state.js';
 
-	function updateEstimate(value) {
+	const { points, playerId, currentVote, socketUrl } = $props();
+
+	async function updateEstimate(value) {
 		console.log(`Player ${playerId} estimates the story at ${value}`);
-		socket.send(JSON.stringify({
+		await sendMessage(socketUrl, {
 			eventType: 'update-estimate',
 			payload: {
 				playerId,
 				estimate: value
 			}
-		}));
+		});
 	}
 </script>
 <section aria-label="Voting Buttons">

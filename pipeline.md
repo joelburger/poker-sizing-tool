@@ -16,12 +16,12 @@ gcloud auth application-default login
 ## Tag the Docker Image
 Tag the Docker image with the appropriate GCP Container Registry URL and version:
 ```bash
-docker tag poker-sizing-tool:latest asia.gcr.io/skunkworks-268706/poker-sizing-tool:v0.0.3
+docker tag poker-sizing-tool:latest asia.gcr.io/skunkworks-268706/poker-sizing-tool:v0.0.5
 ```
 
 ## Push the Docker Image
 Push the tagged image to the specified GCP Container Registry:
 ```bash
-docker push asia.gcr.io/skunkworks-268706/poker-sizing-tool:v0.0.3
+docker push asia.gcr.io/skunkworks-268706/poker-sizing-tool:v0.0.5
 ```
 

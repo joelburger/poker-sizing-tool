@@ -1,13 +1,13 @@
 <script>
 
 	import { onMount } from 'svelte';
-	import { fetchSocket } from '$lib/game-state.js';
+	import { sendMessage } from '$lib/game-state.js';
 	import { goto } from '$app/navigation';
 
 	let playerId = $state();
 	let playerName = $state();
 	let { data } = $props();
-	const socket = fetchSocket(data.WS_SERVER_URL);
+	const socketUrl = data.WS_SERVER_URL;
 
 	onMount(() => {
 		playerId = localStorage.getItem('playerId');
@@ -16,33 +16,24 @@
 			playerId = crypto.randomUUID();
 			localStorage.setItem('playerId', playerId);
 		}
-
 	});
 
-	function joinRoom() {
-		if (socket.readyState === WebSocket.OPEN) {
-			socket.send(JSON.stringify({
-				eventType: 'join-room',
-				payload: {
-					playerId,
-					playerName
-				}
-			}));
-			localStorage.setItem('playerName', playerName);
-			goto('/room');
-		}
+	async function joinRoom() {
+		await sendMessage(socketUrl, {
+			eventType: 'join-room',
+			payload: {
+				playerId,
+				playerName
+			}
+		});
+		localStorage.setItem('playerName', playerName);
+		goto('/room');
 	}
 </script>
-{#if socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING}
-	<h2>Lobby</h2>
-	<form on:submit|preventDefault={joinRoom}>
-		<input type="text" name="playerName" bind:value={playerName} placeholder="Enter your name" required
-					 class="input-text" />
+<h2>Lobby</h2>
+<input type="text" name="playerName" bind:value={playerName} placeholder="Enter your name" required
+			 class="input-text" />
 
-		<div class="button-group">
-			<button type="submit">Join</button>
-		</div>
-	</form>
-{:else}
-	<h2>Out for lunch. Be back in 20 minutes.</h2>
-{/if}
+<div class="button-group">
+	<button type="submit" onclick={()=> joinRoom()}>Join</button>
+</div>

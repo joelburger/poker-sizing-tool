@@ -1,5 +1,7 @@
 <script>
-	const { playerList, roomStatus, playerId, socket } = $props();
+	import { sendMessage } from '$lib/game-state.js';
+
+	const { playerList, roomStatus, playerId, socketUrl } = $props();
 
 	function displayPlayerEstimate(player) {
 		if (roomStatus === 'PENDING') {
@@ -13,14 +15,14 @@
 		}
 	}
 
-	function removePlayer(player) {
-		socket.send(JSON.stringify({
+	async function removePlayer(player) {
+		await sendMessage(socketUrl, {
 			eventType: 'remove-player',
 			payload: {
 				playerId: playerId,
 				deletePlayerId: player.id
 			}
-		}));
+		});
 	}
 </script>
 
@@ -36,7 +38,7 @@
 					<td>{player.name}</td>
 					<td>{displayPlayerEstimate(player)}</td>
 					<td>
-						<button class="delete-button" onclick={removePlayer(player)}>❌</button>
+						<button class="delete-button" onclick={() => removePlayer(player)}>❌</button>
 					</td>
 				</tr>
 			{/each}

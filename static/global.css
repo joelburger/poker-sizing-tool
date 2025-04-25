@@ -17,6 +17,7 @@ main {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.04);
     width: 100%;
     max-width: 500px;
+    color: #6c757d;
 }
 
 section {
@@ -246,12 +247,11 @@ section[aria-label="Controls"] {
     transform: scale(1.1);
 }
 
-footer {
+.version-number {
+    position: absolute; /* Position relative to the body */
+    top: 10px; /* Distance from the top */
+    right: 10px; /* Distance from the right */
+    font-size: 0.5rem;
     color: #6c757d;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 0.9rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    text-align: right;
 }
