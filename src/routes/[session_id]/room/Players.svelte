@@ -1,7 +1,7 @@
 <script>
 	import { sendMessage } from '$lib/game-state.js';
 
-	const { playerList, roomStatus, playerId, socketUrl } = $props();
+	const { playerList, roomStatus, playerId, socketUrl, sessionId } = $props();
 
 	function displayPlayerEstimate(player) {
 		if (roomStatus === 'PENDING') {
@@ -19,7 +19,8 @@
 		await sendMessage(socketUrl, {
 			eventType: 'remove-player',
 			payload: {
-				playerId: playerId,
+				sessionId,
+				playerId,
 				deletePlayerId: player.id
 			}
 		});

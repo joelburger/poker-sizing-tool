@@ -1,13 +1,14 @@
 <script>
 	import { sendMessage } from '$lib/game-state.js';
 
-	const { points, playerId, currentVote, socketUrl } = $props();
+	const { points, playerId, currentVote, socketUrl, sessionId } = $props();
 
 	async function updateEstimate(value) {
 		console.log(`Player ${playerId} estimates the story at ${value}`);
 		await sendMessage(socketUrl, {
 			eventType: 'update-estimate',
 			payload: {
+				sessionId,
 				playerId,
 				estimate: value
 			}

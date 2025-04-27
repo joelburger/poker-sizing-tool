@@ -36,26 +36,26 @@
 	});
 
 	function goToLobby() {
-		goto('/');
+		goto(`/${data.SESSION_ID}`);
 	}
 
 	async function resetRoom() {
 		await sendMessage(socketUrl, {
 			eventType: 'reset-room',
 			payload: {
+				sessionId: data.SESSION_ID,
 				playerId
 			}
 		});
 	}
-
 </script>
 
 {#if status && isPlayerInTheRoom(playerId, playerList)}
 	{#if status === 'PENDING' && playerList?.length > 0}
-		<Points points={[1,2,3,5,8,13]} playerId={playerId} currentVote={currentVote} socketUrl={socketUrl} />
+		<Points points={[1,2,3,5,8,13]} playerId={playerId} currentVote={currentVote} socketUrl={socketUrl} sessionId={data.SESSION_ID} />
 	{/if}
 
-	<Players playerList={playerList} roomStatus={status} playerId={playerId} socketUrl={socketUrl} />
+	<Players playerList={playerList} roomStatus={status} playerId={playerId} socketUrl={socketUrl} sessionId={data.SESSION_ID} />
 
 	{#if status === 'COMPLETED' && playerList?.length > 0}
 		<Summary summary={summary} />
@@ -66,7 +66,7 @@
 			<button onclick={goToLobby}>Go back to lobby</button>
 		{:else}
 			{#if status === 'PENDING'}
-				<button onclick={goToLobby}>Change name</button>
+				<button onclick={goToLobby}>Go back to lobby</button>
 			{/if}
 			<button onclick={() => resetRoom()}>Reset voting</button>
 		{/if}

@@ -1,53 +1,35 @@
 <script>
-
-	import { onMount } from 'svelte';
-	import { sendMessage } from '$lib/game-state.js';
 	import { goto } from '$app/navigation';
+	import { nanoid } from 'nanoid';
+	import { onMount } from 'svelte';
 
-	let playerId = $state();
-	let playerName = $state();
-	let { data } = $props();
-	const socketUrl = data.WS_SERVER_URL;
+	let hasPreviousSession = $state();
 
 	onMount(() => {
-		playerId = localStorage.getItem('playerId');
-		playerName = localStorage.getItem('playerName');
-		if (!playerId) {
-			playerId = crypto.randomUUID();
-			localStorage.setItem('playerId', playerId);
-		}
+		hasPreviousSession = ['sessionId', 'playerName', 'playerId'].every(key => localStorage.getItem(key));
 	});
 
-	async function joinRoom() {
-		if (playerName) {
+	function createSession() {
+		const sessionId = nanoid(8);
+		localStorage.setItem('sessionId', sessionId);
 
-			await sendMessage(socketUrl, {
-				eventType: 'join-room',
-				payload: {
-					playerId,
-					playerName
-				}
-			});
-			localStorage.setItem('playerName', playerName);
-			goto('/room');
-		}
+		goto(`/${sessionId}`);
 	}
 
-	function validateInput(event) {
-		const value = event.target.value;
-		playerName = value.replace(/[^a-zA-Z]/g, '').slice(0, 20);
+	function continueSession() {
+		const sessionId = localStorage.getItem('sessionId');
+
+		goto(`/${sessionId}`);
 	}
 </script>
-<div class="input-container">
-	<div class="avatar">
-		<svg viewBox="0 0 24 24" fill="currentColor" class="avatar-icon">
-			<path d="M12 12c2.67 0 8 1.34 8 4v2H4v-2c0-2.66 5.33-4 8-4zm0-2a4 4 0 100-8 4 4 0 000 8z" />
-		</svg>
-	</div>
-	<input type="text" name="playerName" bind:value={playerName} required
-				 class="name-input" oninput={validateInput} placeholder="Enter name" />
+<div class="poker-sizing-blurb">
+	<h3 class="centered-title">What is Poker Sizing?</h3>
+	<p>Poker sizing is a way Agile teams estimate work together. Everyone picks a card with their guess for the task size,
+		then reveals it at the same time. It sparks good discussions and helps the team agree on the effort needed.</p>
 </div>
-<br />
 <div class="button-group">
-	<button type="submit" onclick={()=> joinRoom()}>Join</button>
+	<button onclick={createSession}>New session</button>
+	{#if (hasPreviousSession) }
+		<button onclick={continueSession}>Continue session</button>
+	{/if}
 </div>

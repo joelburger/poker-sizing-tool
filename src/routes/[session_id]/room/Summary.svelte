@@ -1,7 +1,5 @@
 <script>
-
 	const { summary } = $props();
-
 </script>
 
 <section aria-label="Summary">
