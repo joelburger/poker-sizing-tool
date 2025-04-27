@@ -1,13 +1,6 @@
 @font-face {
-    font-family: 'Bangers';
-    src: url('/fonts/Bangers-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Badaboom';
-    src: url('/fonts/BADABB.ttf') format('truetype');
+    font-family: 'BebasNeue';
+    src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -284,7 +277,7 @@ section[aria-label="Controls"] {
 }
 
 .title {
-    font-family: 'Badaboom';
+    font-family: 'BebasNeue';
     color: #1d1d1f;
     font-size: 4em;
 }
