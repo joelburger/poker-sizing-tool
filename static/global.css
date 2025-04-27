@@ -289,6 +289,12 @@ section[aria-label="Controls"] {
     font-size: 4em;
 }
 
+.title a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: normal;
+}
+
 .badge {
     display: inline-block;
     padding: 0.25rem 0.5rem;
@@ -395,14 +401,4 @@ section[aria-label="Controls"] {
 
 .footer a:hover {
     text-decoration: underline;
-}
-
-.floatingchat-container-wrap {
-    left: 12px;
-    top: 12px;
-}
-
-.floating-chat-kofi-popup-iframe {
-    left: 12px;
-    top: 12px;
 }
