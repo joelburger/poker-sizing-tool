@@ -149,6 +149,7 @@ section[aria-label="Controls"] {
         text-align: left;
     }
 }
+
 .input-container {
     display: flex;
     align-items: center;
@@ -185,6 +186,7 @@ section[aria-label="Controls"] {
 .name-input::placeholder {
     color: #bbb;
 }
+
 .voting-buttons {
     display: flex;
     gap: 1rem;
@@ -221,6 +223,7 @@ section[aria-label="Controls"] {
     transform: scale(0.98);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
+
 .summary-section {
     margin-top: 2rem;
 }
@@ -392,4 +395,14 @@ section[aria-label="Controls"] {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+.floatingchat-container-wrap {
+    left: 12px;
+    top: 12px;
+}
+
+.floating-chat-kofi-popup-iframe {
+    left: 12px;
+    top: 12px;
 }
