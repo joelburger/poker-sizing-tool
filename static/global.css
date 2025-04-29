@@ -418,6 +418,14 @@ section[aria-label="Controls"] {
 }
 
 .room-url {
-    width: 400px;
-    overflow-wrap: break-word;
+    border: none;
+    background: none;
+    color: inherit;
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+    text-align: center;
+    cursor: default;
+    outline: none;
+    padding: 0;
 }

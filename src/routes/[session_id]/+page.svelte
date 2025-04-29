@@ -45,7 +45,6 @@
 			console.error('Failed to copy: ', err);
 		}
 	}
-
 </script>
 
 <div class="qr-container">
@@ -54,9 +53,7 @@
 	</button>
 	<img src={data.QR_CODE} alt="QR Code" />
 	<p>Scan the QR code or share this URL to invite others:</p>
-	<div class="room-url">
-		{data.REQUEST_URL}
-	</div>
+	<input type="text" bind:value={data.REQUEST_URL} readonly class="room-url" />
 </div>
 
 <div class="input-container">
