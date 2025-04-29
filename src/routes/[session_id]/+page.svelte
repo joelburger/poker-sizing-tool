@@ -3,7 +3,6 @@
 	import { sendMessage } from '$lib/game-state.js';
 	import { goto } from '$app/navigation';
 
-	let copyButtonText = $state('Copy link');
 	let playerId = $state();
 	let playerName = $state();
 	let { data } = $props();
@@ -29,6 +28,7 @@
 				}
 			});
 			localStorage.setItem('playerName', playerName);
+			localStorage.setItem('sessionId', data.SESSION_ID);
 			goto(`/${data.SESSION_ID}/room`);
 		}
 	}
@@ -41,19 +41,22 @@
 	async function copyToClipboard() {
 		try {
 			await navigator.clipboard.writeText(data.REQUEST_URL);
-			copyButtonText = "Link copied";
-			setTimeout(() => (copyButtonText = "Copy link"), 2000);
 		} catch (err) {
-			console.error("Failed to copy: ", err);
+			console.error('Failed to copy: ', err);
 		}
 	}
 
 </script>
 
 <div class="qr-container">
+	<button class="copy-icon-button" onclick={copyToClipboard}>
+		<img src="/icons/copy.svg" alt="Copy icon" />
+	</button>
 	<img src={data.QR_CODE} alt="QR Code" />
 	<p>Scan the QR code or share this URL to invite others:</p>
-	<p><strong>{data.REQUEST_URL}</strong></p>
+	<div class="room-url">
+		{data.REQUEST_URL}
+	</div>
 </div>
 
 <div class="input-container">
@@ -65,6 +68,5 @@
 </div>
 <br />
 <div class="button-group">
-	<button onclick={copyToClipboard}>{copyButtonText}</button>
 	<button onclick={()=> joinRoom()}>Continue</button>
 </div>

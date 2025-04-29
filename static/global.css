@@ -25,6 +25,7 @@ main {
     width: 100%;
     max-width: 500px;
     color: #6c757d;
+    position: relative;
 }
 
 section {
@@ -338,6 +339,7 @@ section[aria-label="Controls"] {
     border-radius: 8px;
     max-width: 400px;
     background-color: #f9f9f9;
+    position: relative;
 }
 
 .qr-container img {
@@ -350,26 +352,6 @@ section[aria-label="Controls"] {
     font-size: 14px;
     color: #555;
     margin: 0;
-}
-
-.copy-button {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.copy-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-.copy-button:active {
-    transform: scale(1);
 }
 
 .footer {
@@ -394,4 +376,48 @@ section[aria-label="Controls"] {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+.copy-icon-button {
+    position: absolute;
+    top: 1px; /* Adjust as needed */
+    right: 1px; /* Adjust as needed */
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10; /* Ensure it stays above other elements */
+}
+
+.copy-icon-button img {
+    width: 24px; /* Adjust size as needed */
+    height: 24px;
+}
+
+.home-icon-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.home-icon-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.home-icon-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.room-url {
+    width: 400px;
+    overflow-wrap: break-word;
 }

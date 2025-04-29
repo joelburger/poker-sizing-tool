@@ -23,7 +23,6 @@
 	}
 </script>
 <div class="poker-sizing-blurb">
-	<h3 class="centered-title">What is Poker Sizing?</h3>
 	<p>Poker sizing is a way Agile teams estimate work together. Everyone picks a card with their guess for the task size,
 		then reveals it at the same time. It sparks good discussions and helps the team agree on the effort needed.</p>
 </div>

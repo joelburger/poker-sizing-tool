@@ -4,15 +4,10 @@
 	const { playerList, roomStatus, playerId, socketUrl, sessionId } = $props();
 
 	function displayPlayerEstimate(player) {
-		if (roomStatus === 'PENDING') {
-			if (player.estimate) {
-				return 'VOTED';
-			} else {
-				return 'NOT VOTED';
-			}
-		} else {
-			return player.estimate;
+		if (player.estimate) {
+			return roomStatus === 'PENDING' ? 'VOTED' : player.estimate;
 		}
+		return 'NOT VOTED';
 	}
 
 	async function removePlayer(player) {
