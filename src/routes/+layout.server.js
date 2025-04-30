@@ -9,9 +9,9 @@ async function generateQrCode(request) {
 }
 
 function validateSessionId(sessionId) {
-	const sessionIdRegex = /^[a-zA-Z0-9-]+$/;
+	const sessionIdRegex = /^[a-zA-Z0-9-_]+$/;
 	if (!sessionIdRegex.test(sessionId)) {
-		throw new Error('Invalid session ID: Only letters, numbers, and dashes are allowed.');
+		throw new Error('Invalid session ID: Only letters, numbers, dashes and underscores are allowed.');
 	}
 }
 
