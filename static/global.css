@@ -442,3 +442,14 @@ section[aria-label="Controls"] {
     justify-content: flex-end;
     width: 10%;
 }
+
+.donate-button img {
+    border: 0;
+    height: 24px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.donate-button img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
