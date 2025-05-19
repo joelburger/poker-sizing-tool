@@ -1,7 +1,7 @@
 <script>
 	import { sendMessage } from '$lib/game-state.js';
 
-	const { playerList, roomStatus, playerId, socketUrl, sessionId } = $props();
+	const { players, roomStatus, playerId, socketUrl, sessionId } = $props();
 
 	function displayPlayerEstimate(player) {
 		if (player.estimate) {
@@ -26,7 +26,7 @@
 	<h2>Players</h2>
 	<table class="player-list">
 		<tbody>
-		{#each playerList as player, index (index)}
+		{#each players as player, index (index)}
 			<tr class:selected={playerId === player.id}>
 				<td>{player.name}</td>
 				<td><span class="badge" class:voted={player.estimate !== null} class:not-voted={player.estimate === null}>{displayPlayerEstimate(player)}</span></td>

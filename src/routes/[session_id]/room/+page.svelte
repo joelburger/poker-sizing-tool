@@ -9,16 +9,16 @@
 	const { data } = $props();
 	const socketUrl = data.WS_SERVER_URL;
 	let playerId = $state();
-	let playerList = $state([]);
+	let players = $state([]);
 	let status = $state();
 	let summary = $state();
 	let currentVote = $state();
 
-	function isPlayerInTheRoom(playerId, playerList) {
-		if (!playerList || playerList.length === 0) {
+	function isPlayerInTheRoom(playerId, players) {
+		if (!players || players.length === 0) {
 			return false;
 		}
-		return playerList.some(player => player.id === playerId);
+		return players.some(player => player.id === playerId);
 	}
 
 	onMount(() => {
@@ -29,10 +29,10 @@
 	});
 
 	room.subscribe((roomState) => {
-		playerList = roomState.playerList;
+		players = roomState.players;
 		status = roomState.status;
 		summary = roomState.summary;
-		currentVote = playerList?.find(player => player.id === playerId)?.estimate || null;
+		currentVote = players?.find(player => player.id === playerId)?.estimate || null;
 	});
 
 	function goToLobby() {
@@ -50,19 +50,19 @@
 	}
 </script>
 
-{#if status && isPlayerInTheRoom(playerId, playerList)}
-	{#if status === 'PENDING' && playerList?.length > 0}
+{#if status && isPlayerInTheRoom(playerId, players)}
+	{#if status === 'PENDING' && players?.length > 0}
 		<Points points={[1,2,3,5,8,13]} playerId={playerId} currentVote={currentVote} socketUrl={socketUrl} sessionId={data.SESSION_ID} />
 	{/if}
 
-	<Players playerList={playerList} roomStatus={status} playerId={playerId} socketUrl={socketUrl} sessionId={data.SESSION_ID} />
+	<Players players={players} roomStatus={status} playerId={playerId} socketUrl={socketUrl} sessionId={data.SESSION_ID} />
 
-	{#if status === 'COMPLETED' && playerList?.length > 0}
+	{#if status === 'COMPLETED' && players?.length > 0}
 		<Summary summary={summary} />
 	{/if}
 
 	<div class="button-group">
-		{#if playerList?.length === 0}
+		{#if players?.length === 0}
 			<button onclick={goToLobby}>Go back to lobby</button>
 		{:else}
 			{#if status === 'PENDING'}
