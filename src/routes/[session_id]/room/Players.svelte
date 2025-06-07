@@ -28,7 +28,9 @@
 		<tbody>
 		{#each players as player, index (index)}
 			<tr class:selected={playerId === player.id}>
-				<td>{player.name}</td>
+				<td  class="player-info">
+					<img class="avatar" src="/avatars/bot-1.png" alt="Joel's avatar" />
+					{player.name}</td>
 				<td><span class="badge" class:voted={player.estimate !== null} class:not-voted={player.estimate === null}>{displayPlayerEstimate(player)}</span></td>
 				<td>
 					<button class="delete-button" onclick={() => removePlayer(player)}>❌</button>

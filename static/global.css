@@ -76,6 +76,20 @@ section[aria-label="Controls"] button:active {
     border-collapse: collapse;
 }
 
+.player-list .player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-list .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
 .selected {
     background-color: #f0f8ff; /* Light blue background */
     font-weight: bold;
@@ -452,4 +466,36 @@ section[aria-label="Controls"] {
 .donate-button img:hover {
     transform: scale(1.1);
     opacity: 0.8;
+}
+
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.avatar-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.avatar-option img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.avatar-option input[type="radio"] {
+    display: none;
+}
+
+.avatar-option input[type="radio"]:checked + img {
+    border-color: #007bff; /* Highlight selected avatar */
 }
