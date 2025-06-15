@@ -5,12 +5,14 @@
 
 	let playerId = $state();
 	let playerName = $state();
+	let avatar = $state();
 	let { data } = $props();
 	const socketUrl = data.WS_SERVER_URL;
 
 	onMount(() => {
 		playerId = localStorage.getItem('playerId');
 		playerName = localStorage.getItem('playerName');
+		avatar = localStorage.getItem('avatar');
 		if (!playerId) {
 			playerId = crypto.randomUUID();
 			localStorage.setItem('playerId', playerId);
@@ -24,7 +26,8 @@
 				payload: {
 					sessionId: data.SESSION_ID,
 					playerId,
-					playerName
+					playerName,
+					avatar
 				}
 			});
 			localStorage.setItem('playerName', playerName);
@@ -45,6 +48,13 @@
 			console.error('Failed to copy: ', err);
 		}
 	}
+
+	function selectAvatar() {
+		if (playerName) {
+			localStorage.setItem('playerName', playerName);
+		}
+		goto(`/${data.SESSION_ID}/avatar`);
+	}
 </script>
 
 <div class="qr-container">
@@ -57,13 +67,14 @@
 </div>
 
 <div class="input-container">
-	<div class="avatar">
-		<img src="/icons/person.svg" alt="Person icon" class="avatar-icon" />
-	</div>
+	{#if avatar}
+		<img class="avatar" src={`/avatars/${avatar}`} alt={avatar} />
+	{/if}
 	<input type="text" name="playerName" bind:value={playerName} required
 				 class="name-input" oninput={validateInput} placeholder="Enter name" />
 </div>
 <br />
 <div class="button-group">
+	<button onclick={() => selectAvatar()}>Select avatar</button>
 	<button onclick={()=> joinRoom()}>Continue</button>
 </div>

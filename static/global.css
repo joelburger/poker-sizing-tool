@@ -499,3 +499,39 @@ section[aria-label="Controls"] {
 .avatar-option input[type="radio"]:checked + img {
     border-color: #007bff; /* Highlight selected avatar */
 }
+
+.avatar-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.avatar-button:hover {
+    background-color: #0056b3;
+}
+
+.input-container .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.tab-button {
+    padding: 8px 16px;
+    margin-right: 5px;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.tab-button.selected {
+    background: #888;
+    color: white;
+}

@@ -28,10 +28,13 @@
 		<tbody>
 		{#each players as player, index (index)}
 			<tr class:selected={playerId === player.id}>
-				<td  class="player-info">
-					<img class="avatar" src="/avatars/bot-1.png" alt="Joel's avatar" />
+				<td class="player-info">
+					{#if player.avatar}
+						<img class="avatar" src={`/avatars/${player.avatar}`} alt={player.avatar} />
+					{/if}
 					{player.name}</td>
-				<td><span class="badge" class:voted={player.estimate !== null} class:not-voted={player.estimate === null}>{displayPlayerEstimate(player)}</span></td>
+				<td><span class="badge" class:voted={player.estimate !== null}
+									class:not-voted={player.estimate === null}>{displayPlayerEstimate(player)}</span></td>
 				<td>
 					<button class="delete-button" onclick={() => removePlayer(player)}>❌</button>
 				</td>

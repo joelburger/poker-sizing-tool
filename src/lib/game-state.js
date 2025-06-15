@@ -2,10 +2,13 @@ import { writable } from 'svelte/store';
 
 const room = writable({});
 let socket;
+let currentRoomSessionId;
 
 async function sendMessage(socketUrl, message) {
 	const socket = await fetchSocket(socketUrl);
 	socket.send(JSON.stringify(message));
+
+	currentRoomSessionId = message?.payload?.sessionId;
 }
 
 async function fetchSocket(socketUrl) {
@@ -31,7 +34,9 @@ async function fetchSocket(socketUrl) {
 
 				if (eventType === 'room-update') {
 					console.log('room-update', payload);
-					room.set(payload);
+					if (payload.sessionId === currentRoomSessionId) {
+						room.set(payload);
+					}
 				}
 			};
 
@@ -40,7 +45,7 @@ async function fetchSocket(socketUrl) {
 			};
 
 			socket.onclose = (event) => {
-				console.log('WebSocket closed:', event.reason);
+				console.log('WebSocket closed:', event);
 			};
 
 		} catch (error) {
